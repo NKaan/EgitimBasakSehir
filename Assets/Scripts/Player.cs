@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public CharacterController characterController;
 
     public bool validate = true;
     public int count;
@@ -12,8 +15,21 @@ public class Player : MonoBehaviour
 
     public float speed = 1f;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Triggerable triggerable = other.GetComponent<Triggerable>();
+        if (triggerable == null)
+            return;
+
+        if (!triggerable.IsTrigger(this))
+        {
+            Debug.Log("Bir Hata Oldu");
+        }
+    }
+
     private void Awake()
     {
+        characterController = GetComponent<CharacterController>();
     }
 
     void Start()

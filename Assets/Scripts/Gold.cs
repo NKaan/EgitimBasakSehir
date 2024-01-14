@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gold : MonoBehaviour
+public class Gold : MonoBehaviour, Triggerable
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool IsTrigger(Player player)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(gameObject);
+        return true;
     }
 }
