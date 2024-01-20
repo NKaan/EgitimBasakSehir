@@ -17,7 +17,7 @@ public class GameCanvas : MonoBehaviour
         sing = this;
     }
 
-    public void SetGold(int setCount) => goldTxt.text = setCount.ToString();
+    public void SetGold(int setCount) => goldTxt.text = "Altýn : " + setCount.ToString();
 
     //public void SetGold(int setCount)
     //{
