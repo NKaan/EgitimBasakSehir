@@ -10,10 +10,7 @@ public class Portal : MonoBehaviour , Triggerable
 
     public bool IsTrigger(Player player)
     {
-
-        player.characterController.enabled = false;
-        player.transform.position = targetPortal.startPos.position;
-        player.characterController.enabled = true;
+        player.SetPos(targetPortal.startPos.position);
 
         return true;
     }

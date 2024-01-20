@@ -66,6 +66,13 @@ public class Player : MonoBehaviour
         Move();
     }
 
+    public void SetPos(Vector3 newPos)
+    {
+        characterController.enabled = false;
+        transform.position = newPos;
+        characterController.enabled = true;
+    }
+
     public void Move()
     {
 
