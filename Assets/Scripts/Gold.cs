@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gold : MonoBehaviour, Triggerable
+public class Gold : MonoBehaviour, PlayerTriggerable
 {
+
+    public AudioClip goldCollectSound;
+
     [SerializeField]
     private int count = 1;
     public float createTime = 3f;
@@ -18,12 +21,13 @@ public class Gold : MonoBehaviour, Triggerable
     }
 
 
-    public bool IsTrigger(Player player)
+    public bool OnPlayerTriggerEnter(Player player, Collider collider)
     {
         if (!collectable)
             return false;
 
         collectable = false;
+        AudioSource.PlayClipAtPoint(goldCollectSound,transform.position);
         player.AddGold(count);
         animator.SetBool("AddGold", true);
         return true;
@@ -43,4 +47,8 @@ public class Gold : MonoBehaviour, Triggerable
         meshObject.SetActive(true);
     }
 
+    public bool OnPlayerTriggerExit(Player player, Collider collider)
+    {
+        return true;
+    }
 }

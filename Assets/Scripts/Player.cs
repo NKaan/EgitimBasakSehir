@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     {
         gold += count;
         OnAddGold.Invoke(gold);
-        Debug.Log("Karaktere eklenen gold miktarý : " + count);
+        
     }
 
     #endregion
@@ -34,11 +34,23 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Triggerable triggerable = other.GetComponentInParent<Triggerable>();
+        PlayerTriggerable triggerable = other.GetComponentInParent<PlayerTriggerable>();
         if (triggerable == null)
             return;
 
-        if (!triggerable.IsTrigger(this))
+        if (!triggerable.OnPlayerTriggerEnter(this, other))
+        {
+            //Debug.Log("Bir Hata Oldu");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        PlayerTriggerable triggerable = other.GetComponentInParent<PlayerTriggerable>();
+        if (triggerable == null)
+            return;
+
+        if (!triggerable.OnPlayerTriggerExit(this, other))
         {
             //Debug.Log("Bir Hata Oldu");
         }
@@ -47,11 +59,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        
+        OnAddGold.AddListener((_gold) => PlayerPrefs.SetInt("PlayerGold", _gold));
     }
+
 
     void Start()
     {
+        gold = PlayerPrefs.GetInt("PlayerGold");
         OnAddGold.Invoke(gold);
     }
 

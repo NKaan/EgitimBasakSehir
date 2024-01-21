@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : MonoBehaviour, Triggerable
+public class Chest : MonoBehaviour, PlayerTriggerable
 {
 
     private Animator animator;
@@ -18,7 +18,7 @@ public class Chest : MonoBehaviour, Triggerable
     }
 
 
-    public bool IsTrigger(Player player)
+    public bool OnPlayerTriggerEnter(Player player, Collider collider)
     {
 
         if (firstPlayer != null)
@@ -27,6 +27,11 @@ public class Chest : MonoBehaviour, Triggerable
         firstPlayer = player;
 
         animator.Play("Open");
+        return true;
+    }
+
+    public bool OnPlayerTriggerExit(Player player, Collider collider)
+    {
         return true;
     }
 
