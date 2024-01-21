@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +6,9 @@ public class Player : MonoBehaviour
 {
     [Header("Controller")]
     public CharacterController characterController;
+
+    [Header("Camera")]
+    public Transform cameraTarget;
 
     [SerializeField]
     [Header("Inventory")]
@@ -17,13 +18,6 @@ public class Player : MonoBehaviour
     [Header("Events")]
     public UnityEvent<int> OnAddGold = new UnityEvent<int>();
     
-    [Header("Example")]
-    public bool validate = true;
-    public int count;
-    public Monster monster;
-    public float speed = 1f;
-
-
     #region Inventory
 
     public void AddGold(int count = 1)
@@ -53,17 +47,17 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        
     }
 
     void Start()
     {
-        Debug.Log("Moonster Null mu " + (monster == null));
         OnAddGold.Invoke(gold);
     }
 
     void Update()
     {
-        Move();
+
     }
 
     public void SetPos(Vector3 newPos)
@@ -73,15 +67,5 @@ public class Player : MonoBehaviour
         characterController.enabled = true;
     }
 
-    public void Move()
-    {
-
-
-
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        Vector3 moveTransform = new Vector3(h, 0, v);
-        transform.Translate(moveTransform * speed * Time.deltaTime);
-    }
 
 }
