@@ -35,6 +35,11 @@ public class Chest : MonoBehaviour, PlayerTriggerable
         return true;
     }
 
+    public bool OnPlayerTriggerStay(Player player, Collider collider)
+    {
+        return true;
+    }
+
     public void AddGift()
     {
         firstPlayer.AddGold(goldCount);

@@ -24,9 +24,13 @@ public class Respawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (transform.position.y < -2)
-            myPlayer.SetPos(respawnPosition);
+            RespawnMethod();
+    }
 
+    public void RespawnMethod()
+    {
+        myPlayer.SetPos(respawnPosition);
+        myPlayer.Restart();
     }
 }

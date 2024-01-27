@@ -20,9 +20,17 @@ public class Gold : MonoBehaviour, PlayerTriggerable
         animator = GetComponent<Animator>();
     }
 
+    public Gold SetCount(int _count) 
+    {
+        count = _count;
+        return this;
+    } 
 
     public bool OnPlayerTriggerEnter(Player player, Collider collider)
     {
+        if (player.death)
+            return true;
+
         if (!collectable)
             return false;
 
@@ -30,6 +38,11 @@ public class Gold : MonoBehaviour, PlayerTriggerable
         AudioSource.PlayClipAtPoint(goldCollectSound,transform.position);
         player.AddGold(count);
         animator.SetBool("AddGold", true);
+        return true;
+    }
+
+    public bool OnPlayerTriggerStay(Player player, Collider collider)
+    {
         return true;
     }
 

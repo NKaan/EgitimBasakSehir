@@ -20,4 +20,9 @@ public class Portal : MonoBehaviour , PlayerTriggerable
         return true;
     }
 
+    public bool OnPlayerTriggerStay(Player player, Collider collider)
+    {
+        return true;
+    }
+
 }
