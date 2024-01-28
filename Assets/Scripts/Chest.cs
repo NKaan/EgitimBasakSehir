@@ -10,7 +10,7 @@ public class Chest : MonoBehaviour, PlayerTriggerable
     public float resetTime = 20f;
 
     [SerializeField]
-    private int goldCount;
+    public int goldCount;
 
     private void Awake()
     {
@@ -42,8 +42,14 @@ public class Chest : MonoBehaviour, PlayerTriggerable
 
     public void AddGift()
     {
-        firstPlayer.AddGold(goldCount);
+        firstPlayer?.AddGold(goldCount);
 
+        if (resetTime == -1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+            
         Invoke("ResetObject", resetTime);
     }
 
