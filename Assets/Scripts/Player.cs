@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
             AddExp(0);
             return;
         }
+
         OnAddExp.Invoke(playerLevel,expPoint, istenilenExp);
     }
 
